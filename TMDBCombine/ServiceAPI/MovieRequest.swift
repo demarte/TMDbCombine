@@ -29,7 +29,6 @@ final class MovieRequest: ObservableObject {
         print(completion)
       }) { result in
         self.movies = result.movies
-        print(self.movies)
     }
     .store(in: &cancellables)
   }
