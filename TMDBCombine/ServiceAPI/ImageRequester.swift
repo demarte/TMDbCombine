@@ -36,7 +36,7 @@ final class ImageRequester: ObservableObject {
     guard let path = self.posterPath else { return }
 
     cancellable = URLSession.shared.dataTaskPublisher(for: size.path(poster: path))
-      .tryMap { (data, response) -> UIImage? in
+      .tryMap { (data, response) in
         return UIImage(data: data)
     }
     .catch { error in

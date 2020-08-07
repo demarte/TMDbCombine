@@ -14,9 +14,16 @@ struct MoviesListView: View {
   
   var body: some View {
     VStack {
-      TextField("Search", text: $requester.movieQuery)
+      TextField("Search for a movie, tv show, person...", text: $requester.movieQuery)
         .textFieldStyle(RoundedBorderTextFieldStyle())
         .padding()
+      Picker(selection: $requester.selectedItem, label: EmptyView()) {
+        Text("Popular").tag(0)
+        Text("Top Rated").tag(1)
+        Text("Upcoming").tag(2)
+        Text("At the Movies").tag(3)
+      }
+      .pickerStyle(SegmentedPickerStyle())
       List(requester.movies) { movie in
         MovieRow(movie: movie)
       }
@@ -33,9 +40,9 @@ struct MovieRow: View {
       PosterImageView(path: movie.posterPath, size: .medium)
       VStack(alignment: .leading) {
         Text(movie.title ?? "untitled")
-          .font(.subheadline)
+          .font(.title)
         HStack {
-          Text("\(movie.voteAverage ?? 0)")
+          RatingView(score: movie.voteAverage ?? 0)
           Text("\(movie.releaseDate ?? "")")
             .font(.callout)
         }

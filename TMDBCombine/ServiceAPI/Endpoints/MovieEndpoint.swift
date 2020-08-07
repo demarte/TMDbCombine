@@ -9,12 +9,21 @@
 import Foundation
 
 enum MovieEndpoint {
-  case popular
+  case popular, upcoming, topRated, nowPlaying
 }
 
 extension MovieEndpoint: EndpointType {
   var path: String {
-    return "movie/popular"
+    switch self {
+    case .popular:
+      return "movie/popular"
+    case .upcoming:
+      return "movie/upcoming"
+    case .topRated:
+      return "movie/top_rated"
+    case .nowPlaying:
+      return "movie/now_playing"
+    }
   }
   
   var method: Method {
@@ -23,9 +32,6 @@ extension MovieEndpoint: EndpointType {
   
   var parameters: [String : String]? {
     let parameters = ["api_key": APIConstants.apiKey]
-    switch self {
-    case .popular:
-      return parameters
-    }
+    return parameters
   }
 }
