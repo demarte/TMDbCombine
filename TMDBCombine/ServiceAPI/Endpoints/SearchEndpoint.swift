@@ -16,12 +16,12 @@ extension SearchEndpoint: EndpointType {
   var path: String {
     return "search/movie"
   }
-  
+
   var method: Method {
     return .get
   }
-  
-  var parameters: [String : String]? {
+
+  var parameters: [String: String]? {
     var parameters = ["api_key": APIConstants.apiKey]
     switch self {
     case .movie(let query):

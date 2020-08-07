@@ -21,7 +21,7 @@ struct Movie: Codable, Identifiable {
   let originalTitle: String?
   let genreIds: [Int]?
   let posterPath: String?
-  
+
   enum CodingKeys: String, CodingKey {
     case title, overview, popularity
     case posterPath = "poster_path"

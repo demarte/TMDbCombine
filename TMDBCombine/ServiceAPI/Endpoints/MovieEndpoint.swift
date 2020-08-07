@@ -25,12 +25,12 @@ extension MovieEndpoint: EndpointType {
       return "movie/now_playing"
     }
   }
-  
+
   var method: Method {
     return .get
   }
-  
-  var parameters: [String : String]? {
+
+  var parameters: [String: String]? {
     let parameters = ["api_key": APIConstants.apiKey]
     return parameters
   }

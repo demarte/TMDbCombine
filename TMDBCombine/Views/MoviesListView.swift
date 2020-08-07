@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct MoviesListView: View {
-  
+
   @ObservedObject private var requester = QueryRequest()
-  
+
   var body: some View {
     VStack {
       TextField("Search for a movie, tv show, person...", text: $requester.movieQuery)
@@ -32,9 +32,9 @@ struct MoviesListView: View {
 }
 
 struct MovieRow: View {
-  
+
   var movie: Movie
-  
+
   var body: some View {
     HStack {
       PosterImageView(path: movie.posterPath, size: .medium)

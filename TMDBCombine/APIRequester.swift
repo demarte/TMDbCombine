@@ -10,16 +10,16 @@ import Foundation
 import Combine
 
 final class MovieRequest: ObservableObject {
-  
+
   private var endpoint: EndpointType
   var cancellables: Set<AnyCancellable> = []
   @Published var movies: [Movie] = []
-  
+
   init(endpoint: EndpointType) {
     self.endpoint = endpoint
     createDataTaskPublisher()
   }
-  
+
   private func createDataTaskPublisher() {
     URLSession.shared.dataTaskPublisher(for: endpoint.request)
       .map(\.data)
@@ -27,10 +27,10 @@ final class MovieRequest: ObservableObject {
       .receive(on: DispatchQueue.main)
       .sink(receiveCompletion: { (completion) in
         print(completion)
-      }) { result in
+      }, receiveValue: { result in
         self.movies = result.movies
         print(self.movies)
-    }
+    })
     .store(in: &cancellables)
   }
 }

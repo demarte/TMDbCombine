@@ -9,6 +9,5 @@
 import Foundation
 
 struct APIConstants {
-  
   static let baseURL = ""
 }

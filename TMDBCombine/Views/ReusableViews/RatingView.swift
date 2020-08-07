@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct RatingView: View {
-  
+
   let score: Double
   @State private var isDisplayed = false
-    
+
   var body: some View {
     ZStack {
       GeometryReader { proxy in
@@ -27,8 +27,6 @@ struct RatingView: View {
           .frame(width: proxy.size.width * 0.9)
           .position(proxy.size.center)
           .rotationEffect(.degrees(self.rotationAngle))
-        
-        
         HStack(spacing: 0.0) {
           if self.score == 0 {
             Text("NR")
@@ -49,7 +47,7 @@ struct RatingView: View {
       self.isDisplayed = true
     }
   }
-  
+
   private var color: Color {
     switch score {
     case 0:
@@ -64,8 +62,8 @@ struct RatingView: View {
       return .green
     }
   }
-  
-  // MARK: - Drawing Constants -
+
+// MARK: - Drawing Constants -
   private let rotationAngle: Double = -90
 }
 

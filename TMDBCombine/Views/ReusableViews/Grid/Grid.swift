@@ -16,10 +16,10 @@ extension Grid where Item: Identifiable, ID == Item.ID {
 
 struct Grid<Item, ID, ItemView>: View where ID: Hashable, ItemView: View {
   private var items: [Item]
-  private var id: KeyPath<Item,ID>
+  private var id: KeyPath<Item, ID>
   private var viewForItem: (Item) -> ItemView
 
-  init(_ items: [Item], id: KeyPath<Item,ID>, viewForItem: @escaping (Item) -> ItemView) {
+  init(_ items: [Item], id: KeyPath<Item, ID>, viewForItem: @escaping (Item) -> ItemView) {
     self.items = items
     self.id = id
     self.viewForItem = viewForItem
@@ -30,15 +30,15 @@ struct Grid<Item, ID, ItemView>: View where ID: Hashable, ItemView: View {
       self.body(for: GridLayout(itemCount: self.items.count, in: geometry.size))
     }
   }
-  
+
   private func body(for layout: GridLayout) -> some View {
     return ForEach(items, id: id) { item in
       self.body(for: item, in: layout)
     }
   }
-  
+
   private func body(for item: Item, in layout: GridLayout) -> some View {
-    let index = items.firstIndex(where: { item[keyPath: id] == $0[keyPath: id] } )
+    let index = items.firstIndex(where: { item[keyPath: id] == $0[keyPath: id] })
     return Group {
       if index != nil {
         viewForItem(item)
@@ -48,4 +48,3 @@ struct Grid<Item, ID, ItemView>: View where ID: Hashable, ItemView: View {
     }
   }
 }
-

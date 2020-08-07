@@ -9,16 +9,16 @@
 import SwiftUI
 
 struct PosterImageView: View {
-  
+
   @ObservedObject var imageRequester: ImageRequester
   @State var isLoading = true
   private let requesterSize: ImageRequester.Size
-  
+
   init(path: String?, size: ImageRequester.Size) {
     _imageRequester = ObservedObject(wrappedValue: ImageCache.shared.loadImage(for: path, with: size))
     self.requesterSize = size
   }
-  
+
   var body: some View {
     ZStack {
       if self.imageRequester.image != nil {
@@ -37,7 +37,7 @@ struct PosterImageView: View {
     .frame(width: posterSize.width, height: posterSize.height)
     .cornerRadius(10.0)
   }
-  
+
   private var posterSize: CGSize {
     switch requesterSize {
     case .small:

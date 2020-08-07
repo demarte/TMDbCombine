@@ -21,19 +21,19 @@ extension EndpointType {
   var headers: [String: String]? {
     return nil
   }
-  
+
   var baseURL: URL {
     return APIConstants.baseURL
       .appendingPathComponent(APIConstants.apiVersion)
   }
-  
+
   var request: URLRequest {
      let url: URL = {
        path.isEmpty ? baseURL : baseURL.appendingPathComponent(path)
      }()
-     
+
      var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-     
+
      if method == .get {
        let queryItems = parameters?.compactMap { URLQueryItem(name: $0.key, value: $0.value) } ?? []
        urlComponents?.queryItems = queryItems
