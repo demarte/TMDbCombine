@@ -30,10 +30,15 @@ struct RatingView: View {
         
         
         HStack(spacing: 0.0) {
-          Text("\(Int(self.score * 10))")
-            .font(Font.system(size: proxy.size.width * 0.35))
-          Text("%")
-            .font(Font.system(size: proxy.size.width * 0.12))
+          if self.score == 0 {
+            Text("NR")
+              .font(Font.system(size: proxy.size.width * 0.35))
+          } else {
+            Text("\(Int(self.score * 10))")
+              .font(Font.system(size: proxy.size.width * 0.35))
+            Text("%")
+              .font(Font.system(size: proxy.size.width * 0.12))
+          }
         }
         .foregroundColor(.white)
         .position(proxy.size.center)
@@ -47,7 +52,9 @@ struct RatingView: View {
   
   private var color: Color {
     switch score {
-    case 0...3.9:
+    case 0:
+      return .black
+    case 0.1...3.9:
       return .red
     case 4...5.9:
       return .orange
